@@ -1,0 +1,74 @@
+﻿@page "/fetchProducts/{productId}"
+@using RepositoryLayer.Models
+@using MudBlazor
+@using ViewModels
+@inject MyBlazorApp.Service.IBlazorService service
+@inject NavigationManager navigate
+
+<h3>FetchProduct</h3>
+
+<MudContainer Class="mt-4">
+    <MudPaper Class="p-4 px-md-6">
+        <MudCardHeader Typo="Typo.h5" Align="Align.Center">Product Details</MudCardHeader>
+
+        @if (product != null)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudDrawerHeader Typo="Typo.subtitle1" Class="mt-2 mb-0">Product ID:</MudDrawerHeader>
+                <MudText Typo="Typo.body1">@product.Id</MudText>
+                </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudDrawerHeader Typo="Typo.subtitle1" Class="mt-2 mb-0">Product Name:</MudDrawerHeader>
+                <MudText Typo="Typo.body1">@product.Name</MudText>
+                </MudItem>
+            <MudItem xs="12" sm="6" md="4">
+                <MudDrawerHeader Typo="Typo.subtitle1" Class="mt-2 mb-0">Product Price:</MudDrawerHeader>
+                <MudText Typo="Typo.body1">@product.Price</MudText>
+                </MudItem>
+
+            @if (product.Orders.Any())
+            {
+                <MudItem xs="12" sm="6" md="4">
+                    <MudDrawerHeader Typo="Typo.subtitle1" Class="mt-2 mb-0">Order By:</MudDrawerHeader>
+                    @foreach (var order in product.Orders)
+                    {
+                        <MudText Typo="Typo.body1">@order.OrderBy</MudText>
+                    }
+                </MudItem>
+            }
+
+
+        }
+        else
+        {
+            <MudAlert Severity="Severity.Error" Class="mt-3">Product not found.</MudAlert>
+        }
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" Class="mt-4" @onclick="NavigateToProducts">
+            Back to Products
+        </MudButton>
+    </MudPaper>
+</MudContainer>
+
+@code {
+
+    [Parameter]
+    public string productId { get; set; }
+    private ProductVM product;
+
+    int Id;
+    protected override async Task OnInitializedAsync()
+    {
+        if (int.TryParse(productId, out Id))
+        {
+            product = await service.GetProductById(Id);
+        }
+    }
+
+
+    private void NavigateToProducts()
+    {
+        navigate.NavigateTo("/products");
+    }
+
+}

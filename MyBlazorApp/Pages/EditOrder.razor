@@ -1,0 +1,73 @@
+﻿@page "/editorder/{orderId}"
+@using ViewModels
+@using System.Text.Json
+@inject MyBlazorApp.Service.IOrderBlazorService service
+@inject NavigationManager NavigationManager
+
+@using MudBlazor
+<MudThemeProvider />
+<MudDialogProvider />
+<PageTitle>Edit Order</PageTitle>
+<h1>Edit Order</h1>
+@if (order == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudForm Model="order">
+        <MudNumericField @bind-Value="order.ProductId" Label="ProductId" />
+        <MudTextField @bind-Value="order.OrderBy" Label="OrderBy" />
+        <br />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveChanges">Save Changes</MudButton>
+    </MudForm>
+}
+@code {
+    [Parameter]
+    public string orderId { get; set; }
+    private OrderVM order;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (int.TryParse(orderId, out int parsedId))
+            {
+
+                order = await service.GetOrderById(parsedId);
+                Console.WriteLine($"Order data: {JsonSerializer.Serialize(order)}");
+                if (order == null)
+                {
+
+                    NavigationManager.NavigateTo("/orders");
+                }
+            }
+            else
+            {
+
+                NavigationManager.NavigateTo("/orders");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error initializing edit page: {ex.Message}");
+        }
+    }
+
+    private async Task SaveChanges()
+    {
+        try
+        {
+            if (order != null)
+            {
+
+                await service.Update(order);
+
+                NavigationManager.NavigateTo("/orders");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving changes: {ex.Message}");
+        }
+    }
+}

@@ -1,0 +1,70 @@
+﻿@page "/products"
+@using ViewModels
+@using MudBlazor
+@using RepositoryLayer.Models
+@inject MyBlazorApp.Service.IBlazorService service
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+<PageTitle>Product List</PageTitle>
+<h1>Products</h1>
+@if (products == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
+            {
+                <tr>
+                    <td><a href="@($"fetchProducts/{product.Id}")">@product.Name</a> </td>
+                    <td>@product.Price</td>
+                    <td>@product.Description</td>
+                    <td>
+                        <button class="btn btn-success" @onclick="@(() => EditProduct(product))">Edit</button>
+                        <button class="btn btn-danger" @onclick="@(() => DeleteProduct(product))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+@code {
+    private List<ProductVM> products = new List<ProductVM>();
+    protected override async Task OnInitializedAsync()
+    {
+        products = (await service.GetAll()).ToList();
+    }
+    private void EditProduct(ProductVM product)
+    {
+        
+        NavigationManager.NavigateTo($"/editproduct/{product.Id}");
+    }
+    private async Task DeleteProduct(ProductVM product)
+    {
+        var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to delete {product.Name}?");
+        if (confirmed)
+        {
+            try
+            {
+                
+                await service.Delete(product.Id);
+                
+                products.Remove(product);     
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting product: {ex.Message}");
+            }
+        }
+    }
+}

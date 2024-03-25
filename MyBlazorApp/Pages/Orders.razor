@@ -1,0 +1,77 @@
+﻿@page "/orders"
+@using RepositoryLayer.Models
+@using ViewModels
+@inject MyBlazorApp.Service.IOrderBlazorService service
+@inject IJSRuntime JSRuntime
+@inject NavigationManager NavigationManager
+@using MudBlazor
+
+<PageTitle>Order List</PageTitle>
+<h1>Orders</h1>
+
+@if (orders == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product ID</th>
+                <th>Order By</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in orders)
+            {
+                <tr>
+                    <td>@order.ProductId</td>
+                    <td>@order.OrderBy</td>
+                    <td>
+                        <button class="btn btn-success" @onclick="@(() => EditOrder(order))">Edit</button>
+                        <button class="btn btn-danger" @onclick="@(() => DeleteOrder(order))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<OrderVM> orders = new List<OrderVM>();
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        orders = (await service.GetAll()).ToList();
+    }
+
+    private void EditOrder(OrderVM order)
+    {
+        NavigationManager.NavigateTo($"/editorder/{order.Id}");
+    }
+
+    private async Task DeleteOrder(OrderVM order)
+    {
+        var confirmed = await JSRuntime.InvokeAsync<bool>("confirm", $"Are you sure you want to delete {order.OrderBy}?");
+        if (confirmed)
+        {
+            try
+            {
+
+                await service.Delete(order.Id);
+
+                orders.Remove(order);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting order: {ex.Message}");
+            }
+        }
+    }
+
+
+}

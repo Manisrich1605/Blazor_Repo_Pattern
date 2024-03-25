@@ -1,0 +1,74 @@
+﻿@page "/editproduct/{productId}"
+@using ViewModels
+@using System.Text.Json
+@inject MyBlazorApp.Service.IBlazorService service
+@inject NavigationManager NavigationManager
+
+@using MudBlazor
+<MudThemeProvider />
+<MudDialogProvider />
+<PageTitle>Edit Product</PageTitle>
+<h1>Edit Product</h1>
+@if (product == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <MudForm Model="product">
+        <MudTextField @bind-Value="product.Name" Label="Name" />
+        <MudNumericField @bind-Value="product.Price" Label="Price" />
+        <MudTextField @bind-Value="product.Description" Label="Description" Multiline="true" Rows="3" />
+        <br />
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="SaveChanges">Save Changes</MudButton>
+    </MudForm>
+}
+@code {
+    [Parameter]
+    public string productId { get; set; }
+    private ProductVM product;
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (int.TryParse(productId, out int parsedId))
+            {
+                
+                product = await service.GetProductById(parsedId);
+                Console.WriteLine($"Product data: {JsonSerializer.Serialize(product)}");
+                if (product == null)
+                {
+                    
+                    NavigationManager.NavigateTo("/products");
+                }
+            }
+            else
+            {
+               
+                NavigationManager.NavigateTo("/products");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error initializing edit page: {ex.Message}");
+        }
+    }
+
+    private async Task SaveChanges()
+    {
+        try
+        {
+            if (product != null)
+            {
+                
+                await service.Update(product);
+                
+                NavigationManager.NavigateTo("/products");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving changes: {ex.Message}");
+        }
+    }
+}

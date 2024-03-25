@@ -1,0 +1,45 @@
+﻿@page "/addorder"
+
+<h3>Add Order</h3>
+@using MudBlazor
+@using ViewModels
+@inject MyBlazorApp.Service.IOrderBlazorService service
+@inject NavigationManager navigate
+
+<EditForm Model="@newOrder" OnSubmit="AddNewOrder">
+    <DataAnnotationsValidator />
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField Label="Product Id" HelperText="Product Id"
+                                  @bind-Value="newOrder.ProductId" For="@(() => newOrder.ProductId)" InputType="InputType.Text" />
+
+                    <MudTextField Label="Order By" HelperText="Order By"
+                                  @bind-Value="newOrder.OrderBy" For="@(() => newOrder.OrderBy)" InputType="InputType.Text" />
+
+
+
+
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Add Order</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    </MudGrid>
+</EditForm>
+
+
+@code {
+    private OrderVM newOrder = new OrderVM();
+
+
+
+    private async Task AddNewOrder()
+    {
+        int orderId = await service.Add(newOrder);
+
+        navigate.NavigateTo("/orders");
+    }
+}

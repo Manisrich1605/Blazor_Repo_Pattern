@@ -1,0 +1,17 @@
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\bin\Debug\net8.0\Business.deps.json
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\bin\Debug\net8.0\Business.dll
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\bin\Debug\net8.0\Business.pdb
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\bin\Debug\net8.0\RepositoryLayer.dll
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\bin\Debug\net8.0\ViewModels.dll
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\bin\Debug\net8.0\RepositoryLayer.pdb
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\bin\Debug\net8.0\ViewModels.pdb
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\Business.csproj.AssemblyReference.cache
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\Business.GeneratedMSBuildEditorConfig.editorconfig
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\Business.AssemblyInfoInputs.cache
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\Business.AssemblyInfo.cs
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\Business.csproj.CoreCompileInputs.cache
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\Business.csproj.CopyComplete
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\Business.dll
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\refint\Business.dll
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\Business.pdb
+D:\Blazor_REPO_BUS\MyBlazorApp\Business\obj\Debug\net8.0\ref\Business.dll

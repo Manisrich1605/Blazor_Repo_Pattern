@@ -1,0 +1,14 @@
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\bin\Debug\net8.0\RepositoryLayer.deps.json
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\bin\Debug\net8.0\RepositoryLayer.runtimeconfig.json
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\bin\Debug\net8.0\RepositoryLayer.dll
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\bin\Debug\net8.0\RepositoryLayer.pdb
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.csproj.AssemblyReference.cache
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.AssemblyInfoInputs.cache
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.AssemblyInfo.cs
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.csproj.CoreCompileInputs.cache
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.dll
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\refint\RepositoryLayer.dll
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.pdb
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\RepositoryLayer.genruntimeconfig.cache
+D:\Blazor_REPO_BUS\MyBlazorApp\RepositoryLayer\obj\Debug\net8.0\ref\RepositoryLayer.dll
